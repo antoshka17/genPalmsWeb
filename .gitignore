@@ -4,3 +4,4 @@ src/training_model/discriminator.pt
 src/training_model/archive
 src/__pycache__
 src/training_model/__pycache__
+src/training_model/yolo

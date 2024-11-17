@@ -10,3 +10,8 @@ opencv-python
 timm
 ultralytics
 pathlib
+glob
+pytorch_fid
+kagglehub
+flask
+

@@ -1,8 +1,6 @@
 import torch
 from torch.utils.data import Dataset
-from PIL import Image
 import os
-import numpy as np
 import cv2
 
 class HandDataset(Dataset):

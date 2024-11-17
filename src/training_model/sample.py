@@ -18,11 +18,6 @@ ngpu = 1
 
 def sample(generator, discriminator, number_of_images):
     bs = 32
-
-    if not Path('generated').exists():
-        os.mkdir('generated')
-
-    
     cnt = 0
     total_images, total_embeddings, total_probs = [], [], []
     for step in tqdm(range(500)):

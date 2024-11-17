@@ -7,14 +7,15 @@ from pathlib import Path
 import random
 import cv2
 
+path_to_server_dir = os.path.abspath('src')
 def clear_static_directory():
-  for fn in glob('static/*.zip'):
+  for fn in glob(f'{path_to_server_dir}/static/*.zip'):
     os.remove(fn)
-  for fn in glob('static/images/*'):
+  for fn in glob(f'{path_to_server_dir}/static/images/*'):
     os.remove(fn)
 
 def make_archive_of_images(images_dir):
-  shutil.make_archive('static/images', 'zip', images_dir)
+  shutil.make_archive(f'{path_to_server_dir}/static/images', 'zip', images_dir)
   
 def validate_input(data):
   digits = [str(i) for i in range(10)]

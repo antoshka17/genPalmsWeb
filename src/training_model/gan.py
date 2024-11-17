@@ -1,23 +1,15 @@
-import argparse
 import os
-import random
 import torch
 import torch.nn as nn
-import torch.nn.parallel
-import torch.optim as optim
-import torch.utils.data
-import torchvision.datasets as dset
-import torchvision.transforms as transforms
 import torchvision.utils as vutils
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-from IPython.display import HTML
 from pathlib import Path
 from PIL import Image
 import cv2
 from tqdm import tqdm
 from collections import OrderedDict
+
+absolute_path = os.path.abspath('src/training_model')
 
 def save_images(timages, folder):
     if not Path(folder).exists():
@@ -137,8 +129,8 @@ class Trainer:
 
     def train(self):
 
-        if not Path('gan_gen').exists():
-            os.mkdir('gan_gen')
+        if not Path(f'{absolute_path}/gan_gen').exists():
+            os.mkdir(f'{absolute_path}/gan_gen')
         img_list = []
         G_losses = []
         D_losses = []
@@ -195,7 +187,7 @@ class Trainer:
                 if ((epoch == num_epochs-1) or (i == len(self.train_dl)-1)):
                     with torch.no_grad():
                         fake = self.generator(self.fixed_noise).detach().cpu().transpose(1, 2, 0)
-                        save_images(fake.numpy(), 'gan_gen/sample_' + str(epoch))
+                        save_images(fake.numpy(), f'{absolute_path}/gan_gen/sample_' + str(epoch))
                         
                     img_list.append(vutils.make_grid(fake, padding=2, normalize=True))
                 
