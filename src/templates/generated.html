@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея изображений</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        figure {
+            text-align: center; 
+            margin: 20px; 
+        }
+        figcaption {
+            font-style: italic;
+            margin-top: 10px; 
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .gallery img {
+            margin: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            width: 300px;
+            height: auto;
+            transition: transform 0.2s;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        .download-btn {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{url_for('index')}}">Вернуться на главную страницу</a>
+    <h1>Галерея изображений</h1>
+    <div class="gallery">
+        {% for item in data %}
+            <figure>
+                <img src="{{ url_for('static', filename='images/' + item[0]) }}" alt="{{ image }}">
+                <figcaption>Настоящее изображение с вероятностью {{item[1] * 100}}%</figcaption>
+            </figure>
+        {% endfor %}
+    </div>
+    <a class="download-btn" href="{{ url_for('static', filename='images.zip')}}" download>Скачать</a>
+
+    <button id="myButton">Рассчитать FID score</button>
+    <div id="result"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#myButton').click(function() {
+                $.ajax({
+                    url: '/generate/get-data',
+                    method: 'GET',
+                    success: function(data) {
+                        $('#result').text(data.message);
+                    },
+                    error: function(error) {
+                        console.log('Ошибка:', error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+argparse
+torch
+torchvision
+numpy
+pandas
+albumentations
+tqdm
+matplotlib
+opencv-python
+timm
+ultralytics
+pathlib
+glob
+pytorch_fid
+kagglehub
+flask
+
